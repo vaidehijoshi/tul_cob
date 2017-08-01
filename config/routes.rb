@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
 
+  concern :searchable, Blacklight::Routes::Searchable.new
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
+  concern :exportable, Blacklight::Routes::Exportable.new
+
   mount Blacklight::Engine => '/'
   mount BlacklightAdvancedSearch::Engine => '/'
+
 
   root to: "catalog#index"
 
@@ -33,10 +38,6 @@ Rails.application.routes.draw do
     end
   end
 
-  concern :searchable, Blacklight::Routes::Searchable.new
-  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
-  concern :exportable, Blacklight::Routes::Exportable.new
-
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
@@ -51,7 +52,8 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
-  
+  end
+
     # User Stuff
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
