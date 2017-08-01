@@ -329,6 +329,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    summon (2.0.5)
+      json
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
@@ -408,10 +410,11 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  summon
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console
 
 BUNDLED WITH
-   1.15.1
+   1.15.3

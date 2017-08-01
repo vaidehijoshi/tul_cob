@@ -54,9 +54,11 @@ Rails.application.routes.draw do
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
     concerns :range_searchable
-
   end
 
+  resource :summon, only: [:index], as: 'summon', path: '/summon', controller: 'summon' do
+    concerns :searchable
+  end
 
   concern :exportable, Blacklight::Routes::Exportable.new
 
