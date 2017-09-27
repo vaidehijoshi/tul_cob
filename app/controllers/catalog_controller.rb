@@ -150,7 +150,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'availability_facet', label: 'Availability'
     config.add_facet_field 'library_facet', label: 'Library'
     config.add_facet_field 'format', label: 'Resource Type'
-    config.add_facet_field 'pub_date', label: 'Date',
+    config.add_facet_field 'pub_date_sort', label: 'Date',
                            range: {
                              num_segments: 6,
                              assumed_boundaries: [1100, Time.now.year + 2],

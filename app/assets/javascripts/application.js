@@ -43,6 +43,7 @@ $(document).ready(function(){
 	    }
 	    else $(document).find(':input[id=renew_selected]').prop('disabled', true);
 	});
+  $('#range_pub_date_sort_begin').trigger('click');
 });
 
 
