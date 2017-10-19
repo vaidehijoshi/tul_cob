@@ -13,17 +13,19 @@ git clone git@github.com:tulibraries/tul_cob
 cd tul_cob
 bundle install
 cp config/secrets.yml.example config/secrets.yml
-bundle exec rails db:migrate
-
 ```
 
 We also need to configure the application with our Alma apikey. Start by copying the example alma config file.
 
 ```bash
-cp config.alma.yml.example config/alma.yml
+cp config/alma.yml.example config/alma.yml
 ```
 
 Then edit it adding in the apikey for our application specified in our Ex Libris Developer Network.
+
+```bash
+bundle exec rails db:migrate
+```
 
 
 ### Start the Application
