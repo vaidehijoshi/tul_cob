@@ -36,6 +36,7 @@ class CatalogController < ApplicationController
         score
         author_display
         author_vern_display
+        availability_facet
         creator_display
         format
         imprint_display
@@ -49,7 +50,6 @@ class CatalogController < ApplicationController
       defType: "dismax",
       echoParams: "explicit",
       rows: "10",
-      q.alt: "*:*",
       mm: "2&lt;-1 5&lt;-2 6&lt;90%",
       ps: "3",
       tie: "0.01",
@@ -153,22 +153,7 @@ class CatalogController < ApplicationController
         subject_addl_t^10
       ].join(" "),
       facet: "true",
-      facet.mincount: "1",
-      facet.field: "format",
-      facet.field: "lc_1letter_facet",
-      facet.field: "lc_alpha_facet",
-      facet.field: "lc_b4cutter_facet",
-      facet.field: "language_facet",
-      facet.field: "pub_date",
-      facet.field: "subject_era_facet",
-      facet.field: "subject_geo_facet",
-      facet.field: "subject_topic_facet",
       spellcheck: "true",
-      spellcheck.dictionary: "default",
-      spellcheck.onlyMorePopular: "true",
-      spellcheck.extendedResults: "true",
-      spellcheck.collate: "false",
-      spellcheck.count: "5"
     }
 
     # solr path which will be added to solr base url before the other solr params.
@@ -265,6 +250,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
 
+    config.add_show_field 'electronic_resource_display', label: 'Status/Location', :helper_method => :electronic_resource_link_builder
     config.add_show_field 'title_statement_vern_display', label: 'Title Statement'
     config.add_show_field 'title_uniform_display', label: 'Uniform title'
     config.add_show_field 'title_uniform_vern_display', label: 'Uniform title'
@@ -336,7 +322,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_display', label: 'Language'
     config.add_show_field 'url_resource_display', label: 'Available Online', :helper_method => :electronic_access_links
     config.add_show_field 'url_more_links_display', label: 'Other Links', :helper_method => :electronic_access_links
-
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #

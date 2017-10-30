@@ -188,8 +188,7 @@ RSpec.feature "Searches", type: :feature do
         end
         visit '/'
         fill_in 'q', with: search_string
-        click_button 'Search'
-        #save_and_open_page
+        click_button 'Search'         #save_and_open_page
         within(".document-position-0 h3") do
           test_item['query_type'].each do |query_field|
             test_item[query_field].each do |search_term|
