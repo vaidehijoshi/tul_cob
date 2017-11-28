@@ -95,6 +95,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    brakeman (4.0.1)
     builder (3.2.3)
     byebug (9.1.0)
     capybara (2.15.4)
@@ -412,6 +413,7 @@ DEPENDENCIES
   blacklight_advanced_search
   blacklight_alma!
   blacklight_range_limit
+  brakeman
   byebug
   capybara
   chosen-rails
