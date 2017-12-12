@@ -6,7 +6,7 @@ module CatalogHelper
 
   def thumbnail_classes(document)
     classes = %w[thumbnail col-sm-3 col-lg-2]
-    document[:format].each do |format|
+    document.fetch(:format,[]).each do |format|
       classes << "#{format.downcase}-format"
     end
     classes.join " "
