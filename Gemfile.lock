@@ -175,6 +175,7 @@ GEM
       guard-compat (~> 1.0)
     hashdiff (0.3.7)
     hashie (3.4.6)
+    honeybadger (3.2.0)
     htmlentities (4.3.4)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
@@ -427,6 +428,7 @@ DEPENDENCIES
   guard-rspec
   guard-shell
   hashie (~> 3.4.6)
+  honeybadger (~> 3.1)
   jbuilder (~> 2.5)
   jquery-rails
   launchy
@@ -454,4 +456,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.0

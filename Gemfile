@@ -86,3 +86,4 @@ gem "webmock"
 gem "chosen-rails"
 gem "bento_search"
 gem "omniauth-shibboleth"
+gem 'honeybadger', '~> 3.1'
