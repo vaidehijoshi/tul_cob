@@ -44,7 +44,7 @@ RSpec.describe SearchBuilder , type: :model do
       it "dereferences the key value" do
         allow(context).to receive(:params).and_return(params)
         subject.begins_with_search(solr_parameters)
-        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1}\" ")
+        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1 spellcheck.q=$spell_q_1}\" ")
       end
 
       it "sets a custom solr_parameter for q_1 field." do
@@ -61,13 +61,19 @@ RSpec.describe SearchBuilder , type: :model do
       it "dereferences the key value" do
         allow(context).to receive(:params).and_return(params)
         subject.begins_with_search(solr_parameters)
-        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1}\" ")
+        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1 spellcheck.q=$spell_q_1}\" ")
       end
 
       it "quotes the passed in value." do
         allow(context).to receive(:params).and_return(params)
         subject.begins_with_search(solr_parameters)
         expect(solr_parameters["q_1"]).to eq("\"#{begins_with_tag} Hello\"")
+      end
+
+      it "Removes flank from spellcheck.q" do
+        allow(context).to receive(:params).and_return(params)
+        subject.begins_with_search(solr_parameters)
+        expect(solr_parameters["spell_q_1"]).to eq("Hello")
       end
     end
 
@@ -78,7 +84,7 @@ RSpec.describe SearchBuilder , type: :model do
       it "dereferences multiple key values" do
         allow(context).to receive(:params).and_return(params)
         subject.begins_with_search(solr_parameters)
-        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1}\" AND _query_:\"{ v=$q_2}\" ")
+        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1 spellcheck.q=$spell_q_1}\" AND _query_:\"{ v=$q_2 spellcheck.q=$spell_q_2}\" ")
       end
 
       it "quotes the passed if used" do
@@ -87,6 +93,13 @@ RSpec.describe SearchBuilder , type: :model do
         expect(solr_parameters["q_1"]).to eq("\"#{begins_with_tag} Hello\"")
         expect(solr_parameters["q_2"]).to eq("World")
       end
+
+      it "adds a spellcheck.q query param to all queries" do
+        allow(context).to receive(:params).and_return(params)
+        subject.begins_with_search(solr_parameters)
+        expect(solr_parameters["spell_q_2"]).to eq("World")
+      end
+
     end
 
     context "process exact_phrase_search after :begins_with" do
@@ -151,7 +164,7 @@ RSpec.describe SearchBuilder , type: :model do
       it "dereferences the key value" do
         allow(context).to receive(:params).and_return(params)
         subject.exact_phrase_search(solr_parameters)
-        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1}\" ")
+        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1 spellcheck.q=$spell_q_1}\" ")
       end
 
       it "sets a custom solr_parameter for q_1 field." do
@@ -168,7 +181,7 @@ RSpec.describe SearchBuilder , type: :model do
       it "dereferences the key value" do
         allow(context).to receive(:params).and_return(params)
         subject.exact_phrase_search(solr_parameters)
-        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1}\" ")
+        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1 spellcheck.q=$spell_q_1}\" ")
       end
 
       it "quotes the passed in value." do
@@ -185,7 +198,7 @@ RSpec.describe SearchBuilder , type: :model do
       it "dereferences multiple key values" do
         allow(context).to receive(:params).and_return(params)
         subject.exact_phrase_search(solr_parameters)
-        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1}\" AND _query_:\"{ v=$q_2}\" ")
+        expect(solr_parameters["q"]).to eq("_query_:\"{ v=$q_1 spellcheck.q=$spell_q_1}\" AND _query_:\"{ v=$q_2 spellcheck.q=$spell_q_2}\" ")
       end
 
       it "quotes the passed if used" do

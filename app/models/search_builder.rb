@@ -55,6 +55,9 @@ class SearchBuilder < Blacklight::SearchBuilder
         ops.zip(fields).each { |op, f|
           k, v = f
           solr_parameters[k] = send(method, v, op)
+
+          # keep unprocessed value around to use for spellchecking.
+          solr_parameters["spell_#{k}"] = v
         }
 
       end
@@ -104,7 +107,7 @@ class SearchBuilder < Blacklight::SearchBuilder
     # For details on local parameter dereferencing syntax.
     def param_dereference(q, k)
       local_param, _, connector = q
-      "_query_:\"{#{local_param} v=$#{k}}\" #{connector}"
+      "_query_:\"{#{local_param} v=$#{k} spellcheck.q=$spell_#{k}}\" #{connector}"
     end
 
     def get_params
