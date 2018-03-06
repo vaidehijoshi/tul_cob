@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require datatables
+//= require datatables/dataTables.bootstrap
 //= require 'blacklight_advanced_search'
 //= require chosen-jquery
 //= require jquery_ujs
@@ -18,7 +20,6 @@
 // Required by Blacklight
 //= require blacklight/blacklight
 
-//= require blacklight_alma/blacklight_alma
 
 // For blacklight_range_limit built-in JS, if you don't want it you don't need
 // this:
@@ -26,7 +27,7 @@
 
 //= require_tree .
 
-$(window).load(function(){	
+$(window).load(function(){
 	if ($(window).width() < 768) {
 		$('#appliedParams').insertAfter('#sidebar');
 	}
@@ -56,7 +57,7 @@ $(window).on('resize', function() {
 	}
 });
 
-$(document).ajaxComplete(function(){	
+$(document).ajaxComplete(function(){
 	if ($(window).width() < 768) {
 		$('#appliedParams').insertAfter('#sidebar');
 	}

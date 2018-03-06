@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+
+  def openurl_base
+		"https://sandbox01-na.alma.exlibrisgroup.com/view/uresolver/#{alma_institution_code}/openurl?"
+  end
+
   def render_location(value)
     Rails.configuration.locations[value]
   end

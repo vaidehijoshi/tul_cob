@@ -70,6 +70,13 @@ Rails.application.routes.draw do
   # too, without removing root_url and root_path helpers. oddly, repeating
   # root seems to work.
 
+  get 'almaws/bibs/availability', to: 'almaws#availability'
+  get 'almaws/bibs/:mms_id', to: 'almaws#bib'
+  get 'almaws/bibs/:mms_id/availability', to: 'almaws#bib_availability'
+  get 'almaws/bibs/:mms_id/holdings/:holding_id/items', to: 'almaws#items'
+  get 'almaws/bibs/:mms_id/request-options', to: 'almaws#request_options'
+  get 'almaws/bibs/:mms_id/requests', to: 'almaws#requests'
+
   scope module: "blacklight_alma" do
     get "alma/availability" => "alma#availability"
   end
